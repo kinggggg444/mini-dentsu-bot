@@ -1,503 +1,255 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>MINI-NATSU-MD | Bot WhatsApp</title>
-  <link rel="icon" href="https://files.catbox.moe/s1ggtt.jpeg" type="image/jpeg"/>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-  <style>
-    :root {
-      --primary: #8a2be2;
-      --secondary: #00f7ff;
-      --accent: #ff2a6d;
-      --dark: #0c1020;
-      --darker: #080c18;
-      --glass: rgba(255,255,255,0.05);
-      --glass-border: rgba(255,255,255,0.1);
-    }
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>DENTSU MD V10 — Pairing</title>
+<style>
+  :root {
+    --green: #00ff41;
+    --green2: #00cc33;
+    --dark: #0a0a0f;
+    --dark2: #0d1117;
+    --card: #111827;
+    --border: #00ff4122;
+    --border-hover: #00ff4166;
+    --gray: #374151;
+    --text: #c9d1d9;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:100%;min-height:100vh;overflow-x:hidden}
+  body{background:var(--dark);color:var(--text);font-family:'Courier New',monospace;position:relative}
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+  /* ── Matrix rain canvas ── */
+  #matrix{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;opacity:.07;pointer-events:none}
 
-    html { scroll-behavior: smooth; }
+  /* ── Layout ── */
+  .wrap{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px}
 
-    body {
-      background: var(--darker);
-      font-family: 'Rajdhani', sans-serif;
-      color: #fff;
-      overflow-x: hidden;
-    }
+  /* ── Header ── */
+  .header{text-align:center;margin-bottom:32px}
+  .logo{display:inline-block;font-size:clamp(1.2rem,4vw,2rem);font-weight:700;color:var(--green);text-shadow:0 0 20px var(--green),0 0 40px var(--green);letter-spacing:4px;animation:glow 2s ease-in-out infinite alternate}
+  @keyframes glow{from{text-shadow:0 0 10px var(--green)}to{text-shadow:0 0 30px var(--green),0 0 60px var(--green2)}}
+  .sub{color:#6b7280;font-size:.85rem;margin-top:6px;letter-spacing:2px}
+  .badge{display:inline-flex;align-items:center;gap:6px;background:#052e16;border:1px solid var(--green2);color:var(--green);padding:4px 14px;border-radius:20px;font-size:.75rem;margin-top:10px;animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(0,255,65,.4)}70%{box-shadow:0 0 0 8px rgba(0,255,65,0)}}
+  .dot{width:7px;height:7px;background:var(--green);border-radius:50%;animation:blink 1s infinite}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
 
-    /* ── BACKGROUND ── */
-    .bg-grid {
-      position: fixed; inset: 0; z-index: -2;
-      background-image:
-        linear-gradient(rgba(0,247,255,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,247,255,0.04) 1px, transparent 1px);
-      background-size: 32px 32px;
-    }
-    .bg-glow {
-      position: fixed; inset: 0; z-index: -1;
-      background:
-        radial-gradient(circle at 15% 25%, rgba(138,43,226,0.18) 0%, transparent 55%),
-        radial-gradient(circle at 85% 75%, rgba(0,247,255,0.12) 0%, transparent 55%);
-    }
+  /* ── Banner image ── */
+  .banner{width:100%;max-width:460px;border-radius:12px;border:1px solid var(--border);margin-bottom:24px;display:block;object-fit:cover;filter:brightness(.9) contrast(1.05)}
 
-    /* ── NAVBAR ── */
-    nav {
-      position: fixed; top: 0; width: 100%; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 16px 40px;
-      background: rgba(8,12,24,0.8);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--glass-border);
-    }
-    .nav-logo {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 18px; font-weight: 900;
-      background: linear-gradient(90deg, var(--primary), var(--secondary));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    }
-    .nav-links { display: flex; gap: 32px; }
-    .nav-links a {
-      color: rgba(255,255,255,0.7); text-decoration: none;
-      font-size: 15px; font-weight: 500; letter-spacing: 1px;
-      transition: color .2s;
-    }
-    .nav-links a:hover { color: var(--secondary); }
-    .nav-cta {
-      padding: 8px 22px; border-radius: 8px;
-      background: linear-gradient(135deg, var(--primary), #5500aa);
-      color: #fff !important; font-weight: 700;
-      border: 1px solid rgba(138,43,226,0.4);
-      box-shadow: 0 0 16px rgba(138,43,226,0.35);
-    }
-    .nav-cta:hover { box-shadow: 0 0 28px rgba(138,43,226,0.6) !important; color: #fff !important; }
+  /* ── Card ── */
+  .card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:36px 28px;width:100%;max-width:460px;box-shadow:0 0 40px rgba(0,255,65,.05),0 20px 40px rgba(0,0,0,.4)}
 
-    /* ── HERO ── */
-    .hero {
-      min-height: 100vh;
-      display: flex; align-items: center; justify-content: center;
-      text-align: center; padding: 120px 20px 60px;
-    }
-    .hero-inner { max-width: 700px; }
+  /* ── Terminal header ── */
+  .terminal-bar{display:flex;align-items:center;gap:6px;margin-bottom:20px}
+  .tb-dot{width:10px;height:10px;border-radius:50%}
+  .tb-dot.r{background:#ff5f57}
+  .tb-dot.y{background:#febc2e}
+  .tb-dot.g{background:#28c840}
+  .tb-title{flex:1;text-align:center;font-size:.75rem;color:var(--gray);letter-spacing:1px}
 
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(138,43,226,0.15);
-      border: 1px solid rgba(138,43,226,0.4);
-      border-radius: 50px; padding: 6px 18px;
-      font-size: 13px; color: var(--secondary);
-      letter-spacing: 2px; text-transform: uppercase;
-      margin-bottom: 28px;
-    }
-    .hero-badge span { width: 8px; height: 8px; border-radius: 50%; background: var(--secondary); animation: blink 1.4s infinite; }
-    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+  /* ── Form ── */
+  label{display:block;font-size:.8rem;color:var(--green);margin-bottom:8px;letter-spacing:1px}
+  .input-wrap{position:relative;margin-bottom:20px}
+  .prefix{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--green);font-size:.95rem;pointer-events:none}
+  input[type=text]{
+    width:100%;background:#0d1117;border:1px solid var(--border);border-radius:10px;
+    padding:13px 14px 13px 36px;color:var(--green);font-family:'Courier New',monospace;
+    font-size:1rem;letter-spacing:2px;outline:none;transition:border .2s,box-shadow .2s
+  }
+  input[type=text]:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(0,255,65,.15)}
+  input[type=text]::placeholder{color:#374151;letter-spacing:1px}
 
-    .hero h1 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: clamp(38px, 7vw, 72px); font-weight: 900;
-      line-height: 1.1; margin-bottom: 24px;
-    }
-    .hero h1 .line1 {
-      background: linear-gradient(90deg, #fff 0%, var(--secondary) 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    }
-    .hero h1 .line2 {
-      background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    }
-    .hero p {
-      font-size: 18px; color: rgba(255,255,255,0.65);
-      line-height: 1.7; margin-bottom: 40px;
-    }
+  /* ── Button ── */
+  .btn{width:100%;padding:14px;background:transparent;border:1px solid var(--green);border-radius:10px;
+    color:var(--green);font-family:'Courier New',monospace;font-size:1rem;font-weight:700;
+    letter-spacing:3px;cursor:pointer;position:relative;overflow:hidden;transition:all .3s}
+  .btn::before{content:'';position:absolute;inset:0;background:var(--green);transform:scaleX(0);transform-origin:left;transition:transform .3s;z-index:-1}
+  .btn:hover::before{transform:scaleX(1)}
+  .btn:hover{color:#000;box-shadow:0 0 20px var(--green)}
+  .btn:disabled{opacity:.5;cursor:not-allowed}
+  .btn:disabled::before{display:none}
 
-    .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-    .btn-primary {
-      padding: 14px 36px; border-radius: 10px;
-      background: linear-gradient(135deg, var(--primary), #5500aa);
-      color: #fff; font-family: 'Orbitron', sans-serif;
-      font-size: 14px; font-weight: 700; letter-spacing: 1px;
-      text-decoration: none; border: none; cursor: pointer;
-      box-shadow: 0 0 24px rgba(138,43,226,0.45);
-      transition: transform .2s, box-shadow .2s;
-    }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 40px rgba(138,43,226,0.7); }
-    .btn-outline {
-      padding: 14px 36px; border-radius: 10px;
-      background: transparent; color: var(--secondary);
-      font-family: 'Orbitron', sans-serif; font-size: 14px; font-weight: 700;
-      letter-spacing: 1px; text-decoration: none;
-      border: 1px solid rgba(0,247,255,0.4);
-      box-shadow: 0 0 12px rgba(0,247,255,0.15);
-      transition: transform .2s, box-shadow .2s;
-    }
-    .btn-outline:hover { transform: translateY(-2px); box-shadow: 0 0 28px rgba(0,247,255,0.4); }
+  /* ── Code box ── */
+  .code-section{display:none;margin-top:24px}
+  .code-label{font-size:.78rem;color:var(--green);margin-bottom:10px;letter-spacing:1px}
+  .code-box{
+    background:#0d1117;border:2px solid var(--green);border-radius:12px;
+    padding:20px;text-align:center;font-size:2.2rem;font-weight:700;
+    letter-spacing:10px;color:var(--green);text-shadow:0 0 20px var(--green);
+    animation:glow 2s ease-in-out infinite alternate;word-break:break-all
+  }
+  .steps{background:#0d1117;border:1px solid var(--border);border-radius:10px;padding:16px;margin-top:14px}
+  .steps p{font-size:.78rem;color:var(--text);line-height:2.2;padding:0}
+  .steps p::before{content:'→ ';color:var(--green)}
 
-    .hero-stats {
-      display: flex; gap: 40px; justify-content: center;
-      margin-top: 60px; flex-wrap: wrap;
-    }
-    .stat { text-align: center; }
-    .stat-num {
-      font-family: 'Orbitron', sans-serif; font-size: 30px; font-weight: 900;
-      background: linear-gradient(90deg, var(--primary), var(--secondary));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    }
-    .stat-label { font-size: 13px; color: rgba(255,255,255,0.5); letter-spacing: 1px; text-transform: uppercase; margin-top: 4px; }
+  /* ── Status/error ── */
+  .status{text-align:center;font-size:.82rem;margin-top:14px;min-height:20px;letter-spacing:1px}
+  .status.loading{color:#fbbf24}
+  .status.error{color:#f87171}
+  .status.success{color:var(--green)}
 
-    /* ── SECTION TITLE ── */
-    .section { padding: 100px 20px; }
-    .section-title {
-      text-align: center; margin-bottom: 64px;
-    }
-    .section-title h2 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: clamp(24px, 4vw, 40px); font-weight: 700;
-      background: linear-gradient(90deg, #fff, var(--secondary));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      margin-bottom: 12px;
-    }
-    .section-title p { color: rgba(255,255,255,0.55); font-size: 16px; }
-    .section-line {
-      width: 80px; height: 3px; border-radius: 2px; margin: 16px auto 0;
-      background: linear-gradient(90deg, var(--primary), var(--secondary));
-    }
+  /* ── Footer ── */
+  .footer{margin-top:30px;text-align:center;font-size:.72rem;color:var(--gray);letter-spacing:1px;line-height:2}
+  .footer a{color:var(--green);text-decoration:none}
+  .footer a:hover{text-shadow:0 0 8px var(--green)}
 
-    /* ── FEATURES ── */
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 24px; max-width: 1100px; margin: 0 auto;
-    }
-    .feature-card {
-      background: var(--glass);
-      border: 1px solid var(--glass-border);
-      border-radius: 16px; padding: 32px 24px;
-      backdrop-filter: blur(12px);
-      transition: transform .3s, box-shadow .3s, border-color .3s;
-      position: relative; overflow: hidden;
-    }
-    .feature-card::before {
-      content: ''; position: absolute; inset: 0;
-      background: linear-gradient(135deg, rgba(138,43,226,0.06) 0%, rgba(0,247,255,0.04) 100%);
-      opacity: 0; transition: opacity .3s;
-    }
-    .feature-card:hover { transform: translateY(-6px); border-color: rgba(138,43,226,0.4); box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 20px rgba(138,43,226,0.15); }
-    .feature-card:hover::before { opacity: 1; }
-    .feature-icon {
-      width: 52px; height: 52px; border-radius: 12px;
-      background: linear-gradient(135deg, rgba(138,43,226,0.25), rgba(0,247,255,0.15));
-      border: 1px solid rgba(138,43,226,0.3);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 22px; margin-bottom: 18px;
-    }
-    .feature-card h3 { font-family: 'Orbitron', sans-serif; font-size: 15px; font-weight: 700; margin-bottom: 10px; color: var(--secondary); }
-    .feature-card p { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.6; }
-
-    /* ── PAIR SECTION ── */
-    #pair { background: rgba(138,43,226,0.04); border-top: 1px solid var(--glass-border); border-bottom: 1px solid var(--glass-border); }
-    .pair-wrapper {
-      max-width: 460px; margin: 0 auto;
-      background: var(--glass);
-      border: 1px solid var(--glass-border);
-      border-radius: 20px; padding: 48px 40px;
-      backdrop-filter: blur(16px);
-      box-shadow: 0 24px 60px rgba(0,0,0,0.4), 0 0 40px rgba(138,43,226,0.08);
-    }
-    .pair-icon { text-align: center; font-size: 48px; margin-bottom: 16px; }
-    .pair-wrapper h3 {
-      font-family: 'Orbitron', sans-serif; text-align: center;
-      font-size: 20px; margin-bottom: 8px;
-      background: linear-gradient(90deg, var(--primary), var(--secondary));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    }
-    .pair-wrapper > p { text-align: center; color: rgba(255,255,255,0.5); font-size: 14px; margin-bottom: 32px; }
-    .input-group { position: relative; margin-bottom: 20px; }
-    .input-group i { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: rgba(255,255,255,0.4); font-size: 16px; }
-    .input-group input {
-      width: 100%; padding: 14px 16px 14px 46px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid var(--glass-border);
-      border-radius: 10px; color: #fff;
-      font-family: 'Rajdhani', sans-serif; font-size: 16px;
-      outline: none; transition: border-color .2s, box-shadow .2s;
-    }
-    .input-group input:focus { border-color: rgba(138,43,226,0.6); box-shadow: 0 0 16px rgba(138,43,226,0.2); }
-    .input-group input::placeholder { color: rgba(255,255,255,0.3); }
-    #pair-btn {
-      width: 100%; padding: 14px;
-      background: linear-gradient(135deg, var(--primary), #5500aa);
-      color: #fff; font-family: 'Orbitron', sans-serif;
-      font-size: 14px; font-weight: 700; letter-spacing: 1px;
-      border: none; border-radius: 10px; cursor: pointer;
-      box-shadow: 0 0 20px rgba(138,43,226,0.4);
-      transition: transform .2s, box-shadow .2s;
-    }
-    #pair-btn:hover { transform: translateY(-2px); box-shadow: 0 0 36px rgba(138,43,226,0.65); }
-    #pair-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-    #pair-result { margin-top: 20px; min-height: 48px; }
-    .code-box {
-      background: rgba(0,247,255,0.08); border: 1px solid rgba(0,247,255,0.3);
-      border-radius: 10px; padding: 16px; text-align: center; cursor: pointer;
-      transition: background .2s;
-    }
-    .code-box:hover { background: rgba(0,247,255,0.14); }
-    .code-box .label { font-size: 12px; color: rgba(0,247,255,0.7); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
-    .code-box .value { font-family: 'Orbitron', sans-serif; font-size: 26px; font-weight: 900; color: var(--secondary); letter-spacing: 4px; }
-    .code-box .hint { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 6px; }
-    .msg-error { background: rgba(255,42,109,0.1); border: 1px solid rgba(255,42,109,0.3); border-radius: 10px; padding: 12px 16px; color: var(--accent); font-size: 14px; text-align: center; }
-    .msg-loading { text-align: center; color: rgba(255,255,255,0.55); font-size: 14px; padding: 12px; display: flex; align-items: center; justify-content: center; gap: 10px; }
-    .spinner { width: 18px; height: 18px; border: 2px solid rgba(138,43,226,0.3); border-top-color: var(--primary); border-radius: 50%; animation: spin .7s linear infinite; }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    /* ── HOW IT WORKS ── */
-    .steps { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px; }
-    .step {
-      display: flex; gap: 24px; align-items: flex-start;
-      background: var(--glass); border: 1px solid var(--glass-border);
-      border-radius: 16px; padding: 28px 32px;
-      backdrop-filter: blur(10px);
-      transition: border-color .3s, transform .3s;
-    }
-    .step:hover { border-color: rgba(138,43,226,0.35); transform: translateX(6px); }
-    .step-num {
-      font-family: 'Orbitron', sans-serif; font-size: 28px; font-weight: 900; min-width: 48px;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    }
-    .step h4 { font-family: 'Orbitron', sans-serif; font-size: 14px; color: var(--secondary); margin-bottom: 6px; }
-    .step p { color: rgba(255,255,255,0.55); font-size: 14px; line-height: 1.6; }
-
-    /* ── FOOTER ── */
-    footer {
-      text-align: center; padding: 48px 20px;
-      border-top: 1px solid var(--glass-border);
-      background: rgba(8,12,24,0.6);
-    }
-    .footer-logo {
-      font-family: 'Orbitron', sans-serif; font-size: 20px; font-weight: 900;
-      background: linear-gradient(90deg, var(--primary), var(--secondary));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      margin-bottom: 8px;
-    }
-    footer p { color: rgba(255,255,255,0.4); font-size: 13px; }
-    footer a { color: var(--secondary); text-decoration: none; }
-    .footer-links { display: flex; gap: 24px; justify-content: center; margin-top: 20px; }
-    .footer-links a {
-      color: rgba(255,255,255,0.5); font-size: 22px; transition: color .2s, transform .2s;
-    }
-    .footer-links a:hover { color: var(--secondary); transform: translateY(-3px); }
-
-    /* ── SCROLLBAR ── */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: var(--darker); }
-    ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 3px; }
-  </style>
+  /* ── Scanline overlay ── */
+  body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.05) 2px,rgba(0,0,0,.05) 4px);pointer-events:none;z-index:9999}
+</style>
 </head>
 <body>
+<canvas id="matrix"></canvas>
 
-<div class="bg-grid"></div>
-<div class="bg-glow"></div>
+<div class="wrap">
+  <div class="header">
+    <div class="logo">DENTSU MD V10</div>
+    <div class="sub">by Natsu Tech 🇨🇬 · WhatsApp Multi-Session Bot</div>
+    <div class="badge"><span class="dot"></span> SERVEUR EN LIGNE</div>
+  </div>
 
-<!-- NAVBAR -->
-<nav>
-  <div class="nav-logo">NATSU-MD</div>
-  <div class="nav-links">
-    <a href="#features">Fonctionnalités</a>
-    <a href="#how">Comment ça marche</a>
-    <a href="#pair" class="nav-cta">Connecter</a>
-  </div>
-</nav>
+  <img class="banner" src="https://files.catbox.moe/2ej8eo.jpg" alt="DENTSU MD V10" onerror="this.style.display='none'"/>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-inner">
-    <div class="hero-badge"><span></span> Bot WhatsApp v1.0.0</div>
-    <h1>
-      <div class="line1">MINI-NATSU-MD</div>
-      <div class="line2">WhatsApp Bot</div>
-    </h1>
-    <p>Bot WhatsApp multi-numéros ultra-puissant. Stickers, musique, statuts automatiques,<br/>téléchargements et bien plus — tout en un.</p>
-    <div class="hero-btns">
-      <a href="#pair" class="btn-primary"><i class="fab fa-whatsapp"></i> &nbsp;Connecter maintenant</a>
-      <a href="https://github.com/kinggggg444/mini-dentsu-bot" target="_blank" class="btn-outline"><i class="fab fa-github"></i> &nbsp;GitHub</a>
+  <div class="card">
+    <div class="terminal-bar">
+      <span class="tb-dot r"></span>
+      <span class="tb-dot y"></span>
+      <span class="tb-dot g"></span>
+      <span class="tb-title">DENTSU_PAIRING_TERMINAL v10.0</span>
     </div>
-    <div class="hero-stats">
-      <div class="stat"><div class="stat-num">20+</div><div class="stat-label">Commandes</div></div>
-      <div class="stat"><div class="stat-num">Multi</div><div class="stat-label">Numéros</div></div>
-      <div class="stat"><div class="stat-num">24/7</div><div class="stat-label">En ligne</div></div>
-      <div class="stat"><div class="stat-num">Free</div><div class="stat-label">Open Source</div></div>
-    </div>
-  </div>
-</section>
 
-<!-- FEATURES -->
-<section class="section" id="features">
-  <div class="section-title">
-    <h2>Fonctionnalités</h2>
-    <p>Tout ce dont vous avez besoin dans un seul bot</p>
-    <div class="section-line"></div>
-  </div>
-  <div class="features-grid">
-    <div class="feature-card">
-      <div class="feature-icon">👀</div>
-      <h3>Statuts Auto</h3>
-      <p>Vue et like automatique des statuts WhatsApp avec des emojis personnalisés.</p>
+    <label>[ ENTRER TON NUMÉRO WHATSAPP ]</label>
+    <div class="input-wrap">
+      <span class="prefix">+</span>
+      <input type="text" id="phoneInput" placeholder="242XXXXXXXXX" maxlength="20" autocomplete="off" inputmode="numeric"/>
     </div>
-    <div class="feature-card">
-      <div class="feature-icon">🎵</div>
-      <h3>Téléchargeur</h3>
-      <p>Téléchargez de la musique et des vidéos YouTube directement dans WhatsApp.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">🎨</div>
-      <h3>Stickers</h3>
-      <p>Convertissez n'importe quelle image ou vidéo en sticker WhatsApp en quelques secondes.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">🔊</div>
-      <h3>Text-to-Speech</h3>
-      <p>Google TTS intégré pour convertir du texte en message vocal dans plusieurs langues.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">🤖</div>
-      <h3>Auto-Réponses</h3>
-      <p>Simulation d'enregistrement vocal, réponses automatiques et gestion intelligente des messages.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">👥</div>
-      <h3>Multi-Numéros</h3>
-      <p>Connectez et gérez plusieurs numéros WhatsApp simultanément depuis un seul serveur.</p>
-    </div>
-  </div>
-</section>
 
-<!-- HOW IT WORKS -->
-<section class="section" id="how" style="padding-top:60px">
-  <div class="section-title">
-    <h2>Comment ça marche</h2>
-    <p>Connectez votre WhatsApp en 3 étapes</p>
-    <div class="section-line"></div>
-  </div>
-  <div class="steps">
-    <div class="step">
-      <div class="step-num">01</div>
-      <div>
-        <h4>Entrez votre numéro</h4>
-        <p>Saisissez votre numéro WhatsApp avec l'indicatif international (ex: 33612345678 pour la France).</p>
-      </div>
-    </div>
-    <div class="step">
-      <div class="step-num">02</div>
-      <div>
-        <h4>Récupérez le code de pairing</h4>
-        <p>Un code à 8 chiffres est généré automatiquement. Copiez-le en un clic.</p>
-      </div>
-    </div>
-    <div class="step">
-      <div class="step-num">03</div>
-      <div>
-        <h4>Liez dans WhatsApp</h4>
-        <p>Dans WhatsApp → Appareils connectés → Lier un appareil → Entrez le code. Le bot est actif immédiatement.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PAIR SECTION -->
-<section class="section" id="pair">
-  <div class="section-title">
-    <h2>Connecter WhatsApp</h2>
-    <p>Obtenez votre code de pairing instantanément</p>
-    <div class="section-line"></div>
-  </div>
-  <div class="pair-wrapper">
-    <div class="pair-icon">📱</div>
-    <h3>Pairing Code</h3>
-    <p>Entrez votre numéro pour générer un code</p>
-    <div class="input-group">
-      <i class="fas fa-phone"></i>
-      <input type="tel" id="phone-input" placeholder="Ex: 242068570352" autocomplete="off"/>
-    </div>
-    <button id="pair-btn" onclick="getPairCode()">
-      <i class="fas fa-bolt"></i> &nbsp;GÉNÉRER LE CODE
+    <button class="btn" id="connectBtn" onclick="connect()">
+      &gt;_ CONNECTER
     </button>
-    <div id="pair-result"></div>
-  </div>
-</section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-logo">MINI-NATSU-MD</div>
-  <p>Made with ❤️ by <strong>Alva tech</strong></p>
-  <div class="footer-links">
-    <a href="https://github.com/kinggggg444/mini-dentsu-bot" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-    <a href="https://whatsapp.com/channel/0029VbC1s7fFnSz1YhZYc01h" target="_blank" title="Canal WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    <div class="status" id="status"></div>
+
+    <div class="code-section" id="codeSection">
+      <div class="code-label">[ CODE DE COUPLAGE REÇU ]</div>
+      <div class="code-box" id="codeBox">----</div>
+      <div class="steps">
+        <p>Ouvre WhatsApp sur ton téléphone</p>
+        <p>Menu ⋮ → <strong>Appareils liés</strong></p>
+        <p>Appuie sur <strong>Lier un appareil</strong></p>
+        <p>Sélectionne <strong>Saisir numéro de téléphone</strong></p>
+        <p>Entre le code ci-dessus &amp; confirme</p>
+        <p>✅ Ton bot DENTSU MD V10 est connecté !</p>
+      </div>
+    </div>
   </div>
-</footer>
+
+  <div class="footer">
+    <div>📢 <a href="https://whatsapp.com/channel/0029VbC1s7fFnSz1YhZYc01h" target="_blank">Canal WhatsApp</a> &nbsp;|&nbsp; <a href="https://whatsapp.com/channel/0029VayOeIbGufIvDPhi6m1X" target="_blank">Canal 2</a></div>
+    <div>👥 <a href="https://chat.whatsapp.com/GtXASqDdchAFvEJ95cQQ0F" target="_blank">Groupe WhatsApp</a> &nbsp;|&nbsp; ✈️ <a href="https://t.me/Natsu_or_Dentsu" target="_blank">Telegram</a></div>
+    <div style="margin-top:6px;color:#1f2937">DENTSU MD V10 · Natsu Tech 🇨🇬 · w.dev/NatsuorDentsu</div>
+  </div>
+</div>
 
 <script>
-  // ⚠️ Remplacez cette URL par votre URL Railway après déploiement
-  const BACKEND_URL = window.RAILWAY_URL || "https://VOTRE-APP.railway.app";
+// ── Matrix rain ──────────────────────────────────────────────────
+const canvas = document.getElementById('matrix');
+const ctx    = canvas.getContext('2d');
+let drops    = [];
 
-  async function getPairCode() {
-    const input = document.getElementById('phone-input');
-    const result = document.getElementById('pair-result');
-    const btn = document.getElementById('pair-btn');
-    const raw = input.value.replace(/[^0-9]/g, '');
+function initMatrix() {
+  canvas.width  = window.innerWidth;
+  canvas.height = window.innerHeight;
+  const cols = Math.floor(canvas.width / 16);
+  drops = Array(cols).fill(1);
+}
 
-    if (!raw) {
-      result.innerHTML = '<div class="msg-error"><i class="fas fa-exclamation-circle"></i> Entrez votre numéro WhatsApp</div>';
-      return;
-    }
-    if (raw.length < 10) {
-      result.innerHTML = '<div class="msg-error"><i class="fas fa-times-circle"></i> Numéro invalide — incluez l\'indicatif pays</div>';
-      return;
-    }
-
-    btn.disabled = true;
-    result.innerHTML = '<div class="msg-loading"><div class="spinner"></div> Génération du code en cours...</div>';
-
-    try {
-      const res = await fetch(`${BACKEND_URL}/code?number=${raw}`);
-      const data = await res.json();
-      const code = data.code || null;
-
-      if (!code || code === 'Service Unavailable') {
-        result.innerHTML = '<div class="msg-error"><i class="fas fa-exclamation-triangle"></i> Service indisponible — vérifiez que le bot est démarré</div>';
-      } else {
-        result.innerHTML = `
-          <div class="code-box" onclick="copyCode('${code}')">
-            <div class="label"><i class="fas fa-copy"></i> &nbsp;Code de pairing</div>
-            <div class="value">${code}</div>
-            <div class="hint">Cliquez pour copier · Valable 60 secondes</div>
-          </div>`;
-      }
-    } catch (e) {
-      result.innerHTML = '<div class="msg-error"><i class="fas fa-wifi"></i> Impossible de joindre le serveur. Vérifiez l\'URL Railway.</div>';
-    }
-
-    btn.disabled = false;
-  }
-
-  function copyCode(code) {
-    navigator.clipboard.writeText(code).then(() => {
-      const box = document.querySelector('.code-box .hint');
-      if (box) { box.textContent = '✅ Copié !'; setTimeout(() => { box.textContent = 'Cliquez pour copier · Valable 60 secondes'; }, 2000); }
-    });
-  }
-
-  document.getElementById('phone-input').addEventListener('keydown', e => { if (e.key === 'Enter') getPairCode(); });
-
-  // Smooth scroll pour les liens ancre
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      e.preventDefault();
-      document.querySelector(a.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' });
-    });
+function drawMatrix() {
+  ctx.fillStyle = 'rgba(10,10,15,0.05)';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = '#00ff41';
+  ctx.font      = '14px Courier New';
+  drops.forEach((y, i) => {
+    const char = String.fromCharCode(0x30A0 + Math.random() * 96);
+    ctx.fillText(char, i * 16, y * 16);
+    if (y * 16 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+    drops[i]++;
   });
+}
+
+initMatrix();
+setInterval(drawMatrix, 50);
+window.addEventListener('resize', initMatrix);
+
+// ── Pairing logic ────────────────────────────────────────────────
+let polling = null;
+
+async function connect() {
+  const phone = document.getElementById('phoneInput').value.trim().replace(/\s/g, '');
+  if (!phone || phone.length < 8) {
+    showStatus('⚠️ Entre un numéro valide (ex: 242065121108)', 'error');
+    return;
+  }
+  document.getElementById('connectBtn').disabled = true;
+  document.getElementById('codeSection').style.display = 'none';
+  showStatus('⏳ Connexion au serveur... patiente quelques secondes.', 'loading');
+
+  // Poll for pairing code
+  let attempts = 0;
+  polling = setInterval(async () => {
+    attempts++;
+    try {
+      const res  = await fetch('/api/code');
+      const data = await res.json();
+      if (data.success && data.code) {
+        clearInterval(polling);
+        showCode(data.code);
+      } else if (attempts > 40) {
+        clearInterval(polling);
+        showStatus('❌ Délai dépassé. Redémarre le bot et réessaie.', 'error');
+        document.getElementById('connectBtn').disabled = false;
+      } else {
+        showStatus(`⏳ En attente du code... (${attempts * 3}s)`, 'loading');
+      }
+    } catch {
+      if (attempts > 40) {
+        clearInterval(polling);
+        showStatus('❌ Erreur réseau. Vérifie que le bot tourne.', 'error');
+        document.getElementById('connectBtn').disabled = false;
+      }
+    }
+  }, 3000);
+}
+
+function showCode(code) {
+  document.getElementById('codeBox').textContent = code;
+  document.getElementById('codeSection').style.display = 'block';
+  showStatus('✅ Code reçu ! Saisis-le dans WhatsApp.', 'success');
+  document.getElementById('connectBtn').disabled = false;
+  document.getElementById('connectBtn').textContent = '>_ NOUVEAU CODE';
+}
+
+function showStatus(msg, type) {
+  const el = document.getElementById('status');
+  el.textContent = msg;
+  el.className   = `status ${type}`;
+}
+
+// Auto-check on load
+window.addEventListener('load', async () => {
+  try {
+    const res  = await fetch('/api/code');
+    const data = await res.json();
+    if (data.success && data.code) showCode(data.code);
+  } catch {}
+});
+
+// Allow Enter key
+document.getElementById('phoneInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') connect();
+});
 </script>
 </body>
 </html>

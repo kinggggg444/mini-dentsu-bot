@@ -1,0 +1,21 @@
+require('dotenv').config();
+module.exports = {
+  BOT_NAME:       process.env.BOT_NAME        || 'DENTSU MD V10',
+  DEV_NAME:       process.env.DEV_NAME        || 'Natsu Tech',
+  PREFIX:         process.env.PREFIX          || '.',
+  MODE:           process.env.MODE            || 'public',
+  OWNER_NUMBER:   process.env.OWNER_NUMBER    || '242065121108',
+  MAX_SESSIONS:   parseInt(process.env.MAX_SESSIONS) || 50,
+  PORT:           parseInt(process.env.PORT)  || 3000,
+  SESSION_PATH:   './sessions',
+  TIMEZONE:       'Africa/Brazzaville',
+  MENU_IMAGE:     process.env.MENU_IMAGE      || 'https://files.catbox.moe/2ej8eo.jpg',
+  CHANNEL_LINK:   process.env.CHANNEL_LINK    || 'https://whatsapp.com/channel/0029VbC1s7fFnSz1YhZYc01h',
+  CHANNEL_LINK2:  process.env.CHANNEL_LINK2   || 'https://whatsapp.com/channel/0029VayOeIbGufIvDPhi6m1X',
+  GROUP_LINK:     process.env.GROUP_LINK      || 'https://chat.whatsapp.com/GtXASqDdchAFvEJ95cQQ0F',
+  NEWSLETTER_JID: process.env.NEWSLETTER_JID  || '120363423640959729@newsletter',
+  TELEGRAM:       process.env.TELEGRAM        || 'https://t.me/Natsu_or_Dentsu',
+  WEBSITE:        process.env.WEBSITE         || 'https://w.dev/NatsuorDentsu',
+  VERSION:        'V10',
+  TOTAL_CMDS:     150,
+};

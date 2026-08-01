@@ -1,133 +1,97 @@
-# 🤖 MINI-NATSU-MD
+<div align="center">
 
-<p align="center">
-  <img src="https://files.catbox.moe/s1ggtt.jpeg" width="200" style="border-radius:20px"/>
-</p>
+<img src="https://files.catbox.moe/2ej8eo.jpg" alt="DENTSU MD V10" width="100%" style="border-radius:12px;max-width:700px"/>
 
-<p align="center">
-  <b>Bot WhatsApp Multi-Numéros propulsé par Baileys</b><br/>
-  <i>Rapide • Léger • Puissant</i>
-</p>
+# 🤖 DENTSU MD V10
 
-<p align="center">
-  <a href="https://github.com/kinggggg444/mini-dentsu-bot/stargazers"><img src="https://img.shields.io/github/stars/kinggggg444/mini-dentsu-bot?style=social" alt="Stars"/></a>
-  <a href="https://github.com/kinggggg444/mini-dentsu-bot/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-blue.svg" alt="License"/></a>
-  <img src="https://img.shields.io/badge/node-%3E%3D18.x-brightgreen" alt="Node"/>
-  <img src="https://img.shields.io/badge/platform-WhatsApp-25D366?logo=whatsapp" alt="WhatsApp"/>
-</p>
+**WhatsApp Multi-Session Bot • 150+ Commands • by Natsu Tech 🇨🇬**
+
+[![WhatsApp Channel](https://img.shields.io/badge/📢_Canal_WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://whatsapp.com/channel/0029VbC1s7fFnSz1YhZYc01h)
+[![WhatsApp Groupe](https://img.shields.io/badge/👥_Groupe-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://chat.whatsapp.com/GtXASqDdchAFvEJ95cQQ0F)
+[![Telegram](https://img.shields.io/badge/✈️_Telegram-0088cc?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/Natsu_or_Dentsu)
+
+</div>
 
 ---
 
-## ✨ Fonctionnalités
-
-| Catégorie | Fonctionnalités |
-|---|---|
-| 📊 **Statuts** | Vue automatique des statuts, like automatique avec emojis aléatoires |
-| 🎵 **Médias** | Téléchargement YouTube MP3/MP4, images, vidéos, audio, documents |
-| 🎨 **Stickers** | Création de stickers depuis images et vidéos |
-| 🔊 **Audio** | Google Text-to-Speech (TTS) intégré |
-| 🤖 **Auto** | Enregistrement vocal automatique, réponses automatiques |
-| 🔐 **Sécurité** | Système OTP pour le pairing sécurisé des numéros |
-| 👥 **Multi-numéros** | Support simultané de plusieurs numéros WhatsApp |
-| 🌐 **Interface Web** | Panel de connexion via navigateur |
-| 🛡️ **Admin** | Gestion des administrateurs, liste noire |
-
----
-
-## 🚀 Déployer sur Render
-
-### Étape 1 — Forker ce dépôt
-
-Clique sur **Fork** en haut à droite de cette page.
-
-### Étape 2 — Créer un service sur Render
-
-1. Va sur [render.com](https://render.com) et connecte-toi
-2. Clique sur **New → Web Service**
-3. Connecte ton dépôt GitHub `mini-dentsu-bot`
-4. Remplis les champs :
+## 📋 À propos
 
 | Champ | Valeur |
 |---|---|
-| **Name** | `mini-dentsu-bot` |
-| **Runtime** | `Node` |
-| **Build Command** | `npm install` |
-| **Start Command** | `node index.js` |
+| **Nom** | DENTSU MD V10 |
+| **Développeur** | Natsu Tech 🇨🇬 |
+| **Version** | V10.0 |
+| **Préfixe** | `.` |
+| **Mode** | Public |
+| **Connexion** | Code de couplage (pas de QR) |
+| **Commandes** | 150+ |
+
+---
+
+## 🚀 Déploiement Railway
+
+### Étape 1 — Fork
+Fork ce repo sur ton compte GitHub.
+
+### Étape 2 — Nouveau projet Railway
+Aller sur [railway.com](https://railway.com) → **New Project → Deploy from GitHub** → Sélectionner le fork.
 
 ### Étape 3 — Variables d'environnement
 
-Dans Render → **Environment**, ajoute :
-
-| Variable | Description |
+| Variable | Valeur |
 |---|---|
-| `GITHUB_TOKEN` | Ton GitHub Personal Access Token |
-| `PORT` | `8000` (optionnel, Render le gère) |
+| `BOT_NAME` | DENTSU MD V10 |
+| `DEV_NAME` | Natsu Tech |
+| `PREFIX` | `.` |
+| `MODE` | `public` |
+| `OWNER_NUMBER` | Ton numéro avec indicatif |
+| `MAX_SESSIONS` | `50` |
+| `NODE_ENV` | `production` |
 
-### Étape 4 — Déployer 🎉
-
-Clique sur **Create Web Service** — ton bot sera en ligne en quelques minutes !
-
----
-
-## 🖥️ Installation locale
-
-```bash
-# Cloner le dépôt
-git clone https://github.com/kinggggg444/mini-dentsu-bot.git
-cd mini-dentsu-bot
-
-# Installer les dépendances
-npm install
-
-# Lancer le bot
-npm start
-```
-
-Ouvre ensuite [http://localhost:8000](http://localhost:8000) dans ton navigateur pour connecter ton numéro WhatsApp.
+### Étape 4 — Deploy !
+Clique **Deploy**. Attends 2-3 minutes. 🎉
 
 ---
 
-## ⚙️ Configuration
+## 🔗 Connexion WhatsApp (Code de couplage)
 
-Modifie les paramètres dans `pair.js` (section `config`) :
-
-```js
-const config = {
-    PREFIX: '.',              // Préfixe des commandes
-    OWNER_NUMBER: 'TON_NUMERO', // Ton numéro WhatsApp (avec indicatif)
-    AUTO_VIEW_STATUS: 'true', // Vue auto des statuts
-    AUTO_LIKE_STATUS: 'true', // Like auto des statuts
-    AUTO_RECORDING: 'true',   // Simulation d'enregistrement vocal
-};
-```
+1. Ouvre l'URL de ton service Railway
+2. Entre ton numéro WhatsApp avec l'indicatif (ex: `242065121108`)
+3. Clique **CONNECTER**
+4. Reçois ton code à 8 caractères
+5. Dans WhatsApp → **Menu ⋮ → Appareils liés → Lier avec numéro de téléphone**
+6. Saisis le code → ✅ Connecté !
 
 ---
 
-## 📦 Stack technique
+## 📱 Commandes (150+)
 
-- **[Baileys](https://github.com/whiskeysockets/baileys)** — Librairie WhatsApp Web
-- **Express.js** — Serveur web & API
-- **Jimp / Sharp** — Traitement d'images
-- **FFmpeg** — Conversion audio/vidéo
-- **Octokit** — Intégration GitHub
-- **Cheerio** — Web scraping
-- **Node.js ≥ 18**
-
----
-
-## 🔗 Liens utiles
-
-- 📢 **Canal WhatsApp** : [Rejoindre](https://whatsapp.com/channel/0029VbC1s7fFnSz1YhZYc01h)
-- 🐛 **Signaler un bug** : [Issues](https://github.com/kinggggg444/mini-dentsu-bot/issues)
-
----
-
-## 📄 Licence
-
-Distribué sous licence **Apache 2.0** — voir [LICENSE](./LICENSE) pour plus de détails.
+| Catégorie | Commandes |
+|---|---|
+| 🧠 **AI** | `.ai` `.gpt` `.gpt4` `.gpt5` `.metaai` `.codeai` `.gemini` |
+| 👥 **Groupe** | `.tagall` `.hidetag` `.promote` `.demote` `.kick` `.add` `.grouplink` |
+| 👑 **Owner** | `.ban` `.unban` `.block` `.mode` `.ping` `.alive` `.runtime` |
+| 🎉 **Fun** | `.truth` `.dare` `.joke` `.meme` `.ship` `.rate` `.flirt` `.roast` |
+| 🎮 **Jeux** | `.rps` `.dice` `.coin` `.hangman` `.tictactoe` `.math` `.emojiquiz` |
+| 🎵 **Son** | `.tts` `.say` `.bass` `.robot` `.reverse` |
+| 🔧 **Outils** | `.qrcode` `.shorturl` `.github` `.npm` `.calculat` `.password` |
+| 🎌 **Anime** | `.neko` `.waifu` `.shinobu` `.achar` `.asearch` `.aquote` |
+| 📥 **DL** | `.ytmp3` `.ytb` `.fb` `.insta` `.mp4` |
+| 🌐 **Global** | `.broadcast` `.setbio` `.getbio` `.listgc` `.leaveall` |
+| 🔍 **Search** | `.img` `.wiki` `.yts` `.calc` `.circle` |
 
 ---
 
-<p align="center">
-  Made with ❤️ by <b>Alva tech</b>
-</p>
+## 📞 Contact
+
+| Plateforme | Lien |
+|---|---|
+| 📱 **WhatsApp** | [+242 065 121 108](https://wa.me/242065121108) |
+| 📢 **Canal 1** | [Rejoindre](https://whatsapp.com/channel/0029VbC1s7fFnSz1YhZYc01h) |
+| 📢 **Canal 2** | [Rejoindre](https://whatsapp.com/channel/0029VayOeIbGufIvDPhi6m1X) |
+| 👥 **Groupe** | [Rejoindre](https://chat.whatsapp.com/GtXASqDdchAFvEJ95cQQ0F) |
+| ✈️ **Telegram** | [@Natsu_or_Dentsu](https://t.me/Natsu_or_Dentsu) |
+
+---
+
+<div align="center">Made with ❤️ by <b>Natsu Tech 🇨🇬</b></div>
