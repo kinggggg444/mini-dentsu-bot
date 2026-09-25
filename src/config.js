@@ -12,7 +12,7 @@ module.exports = {
   MENU_IMAGE:     process.env.MENU_IMAGE      || 'https://files.catbox.moe/2ej8eo.jpg',
   CHANNEL_LINK:   process.env.CHANNEL_LINK    || 'https://whatsapp.com/channel/0029VbC1s7fFnSz1YhZYc01h',
   CHANNEL_LINK2:  process.env.CHANNEL_LINK2   || 'https://whatsapp.com/channel/0029VayOeIbGufIvDPhi6m1X',
-  GROUP_LINK:     process.env.GROUP_LINK      || 'https://chat.whatsapp.com/GtXASqDdchAFvEJ95cQQ0F',
+  GROUP_LINK:     process.env.GROUP_LINK      || 'https://chat.whatsapp.com/Lai4Pi8jjAiAc6Q7YRzaQD',
   NEWSLETTER_JID: process.env.NEWSLETTER_JID  || '120363423640959729@newsletter',
   TELEGRAM:       process.env.TELEGRAM        || 'https://t.me/Natsu_or_Dentsu',
   WEBSITE:        process.env.WEBSITE         || 'https://w.dev/NatsuorDentsu',
