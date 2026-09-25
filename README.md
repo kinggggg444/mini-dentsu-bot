@@ -7,7 +7,7 @@
 **WhatsApp Multi-Session Bot • 150+ Commands • by Natsu Tech 🇨🇬**
 
 [![WhatsApp Channel](https://img.shields.io/badge/📢_Canal_WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://whatsapp.com/channel/0029VbC1s7fFnSz1YhZYc01h)
-[![WhatsApp Groupe](https://img.shields.io/badge/👥_Groupe-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://chat.whatsapp.com/GtXASqDdchAFvEJ95cQQ0F)
+[![WhatsApp Groupe](https://img.shields.io/badge/👥_Groupe-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://chat.whatsapp.com/Lai4Pi8jjAiAc6Q7YRzaQD)
 [![Telegram](https://img.shields.io/badge/✈️_Telegram-0088cc?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/Natsu_or_Dentsu)
 
 </div>
@@ -89,7 +89,7 @@ Clique **Deploy**. Attends 2-3 minutes. 🎉
 | 📱 **WhatsApp** | [+242 065 121 108](https://wa.me/242065121108) |
 | 📢 **Canal 1** | [Rejoindre](https://whatsapp.com/channel/0029VbC1s7fFnSz1YhZYc01h) |
 | 📢 **Canal 2** | [Rejoindre](https://whatsapp.com/channel/0029VayOeIbGufIvDPhi6m1X) |
-| 👥 **Groupe** | [Rejoindre](https://chat.whatsapp.com/GtXASqDdchAFvEJ95cQQ0F) |
+| 👥 **Groupe** | [Rejoindre](https://chat.whatsapp.com/Lai4Pi8jjAiAc6Q7YRzaQD) |
 | ✈️ **Telegram** | [@Natsu_or_Dentsu](https://t.me/Natsu_or_Dentsu) |
 
 ---
